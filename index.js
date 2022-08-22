@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
   let dataMapping = dataProject.map((item) => {
     return {
       ...item,
-      isTrue
+      isTrue,
     }
 
   })
@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
     dataProject : dataMapping
   })
 
+console.log(dataProject)
 })
 
 // Contact
@@ -53,16 +54,14 @@ app.post('/project', (req, res) => {
     let react = req.body.reactJs
     let bootstrap = req.body.bootStrap
 
+    // dataTechno.push(node, laravel, react, bootstrap)
+    // console.log(node)
 
-  
     let data = {
       title,
       duration : getTime(sDate, eDate),
       content,
-      node,
-      laravel,
-      react,
-      bootstrap,
+      techno: {node, laravel, react, bootstrap},
       sDate,
       eDate
     }
@@ -94,16 +93,20 @@ app.get('/delete-project/:id', (req, res) => {
 app.get('/edit-project/:id', (req, res) => {
   let dataIndex = req.params.id
 
+  let dataUpdateTechno = dataProject[dataIndex].techno
+
   let dataUpdate = {
     title: dataProject[dataIndex].title,
     duration: dataProject[dataIndex].duration,
     sDate: dataProject[dataIndex].sDate,
     eDate: dataProject[dataIndex].eDate,
     content: dataProject[dataIndex].content,
-    node: dataProject[dataIndex].node,
-    laravel: dataProject[dataIndex].laravel,
-    react: dataProject[dataIndex].react,
-    bootstrap: dataProject[dataIndex].bootstrap 
+    techno: {
+      node: dataUpdateTechno.node,
+      laravel: dataUpdateTechno.laravel,
+      react: dataUpdateTechno.react,
+      bootstrap: dataUpdateTechno.bootstrap
+    }
   }
   
   // let dataUpdate = dataProject[dataIndex]
@@ -121,10 +124,12 @@ app.post('/edit-project/:id', (req, res) => {
   dataProject[dataIndex].eDate = req.body.inputEndDate
   dataProject[dataIndex].duration = getTime(sDate, eDate)
   dataProject[dataIndex].content = req.body.inputDesc
-  dataProject[dataIndex].node = req.body.nodeJs
-  dataProject[dataIndex].laravel = req.body.laravel
-  dataProject[dataIndex].react = req.body.reactJs
-  dataProject[dataIndex].bootstrap = req.body.bootStrap
+  dataProject[dataIndex].techno = {
+    node: req.body.nodeJs,
+    laravel: req.body.laravel,
+    react: req.body.reactJs,
+    bootstrap: req.body.bootStrap
+  }
 
   res.redirect('/')
 })
@@ -134,7 +139,37 @@ app.post('/edit-project/:id', (req, res) => {
 app.get('/detail/:id', (req, res) => {
     let dataIndex = req.params.id
     let dataDetail = dataProject[dataIndex]
-    res.render('detail', {dataIndex, dataDetail})
+
+    let isDefineNode = false;
+    let isDefineLaravel = false;
+    let isDefineReact = false;
+    let isDefineBootstrap = false;
+
+    
+    if(dataDetail.techno.node === "node"){
+      isDefineNode = true
+    }
+    if(dataDetail.techno.laravel === "laravel") {
+      isDefineLaravel = true
+    }
+    if(dataDetail.techno.react === "react") {
+      isDefineReact = true
+    }
+    if(dataDetail.techno.bootstrap === "bootstrap") {
+      isDefineBootstrap = true
+    }
+    
+    
+    res.render('detail', {
+      dataIndex, 
+      dataDetail, 
+      isDefineNode, 
+      isDefineLaravel, 
+      isDefineReact, 
+      isDefineBootstrap
+    })
+  
+
 })
 
 

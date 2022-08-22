@@ -174,10 +174,9 @@
               </p>
 
               <div class="gallery-icon fs-2 d-flex justify-content-between">
-                <i class="fa-brands fa-{{this.node}} fs-4 text-dark"></i>
-                <i class="fa-brands fa-{{this.laravel}} fs-4 text-dark"></i>
-                <i class="fa-brands fa-{{this.react}} fs-4 text-dark"></i>
-                <i class="fa-brands fa-{{this.bootstrap}} fs-4 text-dark"></i>
+                {{#each this.techno}}
+                <i class="fa-brands fa-{{this}} fs-4 text-dark"></i>
+                {{/each}}
               </div>
             </div>
             <div class="card-body d-flex w-100 gap-2">

@@ -61,22 +61,36 @@
             <h3>Technologies</h3>
             <div class="col">
               <div class="row">
-                <i class="fa-brands fa-node"></i>
+                {{#if isDefineNode}}
+                <i class="fa-brands fa-{{dataDetail.techno.node}}"></i>
                 <span>Node Js</span>
+                  {{else}}
+                  <i></i>
+                {{/if}}
               </div>
               <div class="row">
-                <i class="fa-brands fa-laravel"></i>
+                {{#if isDefineLaravel}}
+                <i class="fa-brands fa-{{dataDetail.techno.laravel}}"></i>
                 <span>Laravel Js</span>
+                {{else}}
+                  <i></i>
+                {{/if}}
               </div>
             </div>
             <div class="col">
               <div class="row">
-                <i class="fa-brands fa-react"></i>
+                {{#if isDefineReact}}
+                <i class="fa-brands fa-{{dataDetail.techno.react}}"></i>
                 <span>React Js</span>
+                {{else}}
+                {{/if}}
               </div>
               <div class="row">
-                <i class="fa-brands fa-bootstrap"></i>
+                {{#if isDefineBootstrap}}
+                <i class="fa-brands fa-{{dataDetail.techno.bootstrap}}"></i>
                 <span>Bootstrap</span>
+                {{else}}
+                {{/if}}
               </div>
             </div>
           </div>
