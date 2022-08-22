@@ -61,7 +61,7 @@ app.post('/project', (req, res) => {
       title,
       duration : getTime(sDate, eDate),
       content,
-      techno: {node, laravel, react, bootstrap},
+      techno: [node, laravel, react, bootstrap],
       sDate,
       eDate
     }
